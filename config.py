@@ -46,6 +46,7 @@ APPS = {
         "port": 5000,
         "url": "http://taskschedule.mebbert.com:5000",
         "stack": "python",
+        "db_remote_path": "/home/ec2-user/taskschedule/database.db",
         "exclude_patterns": [
             "venv/", ".git/", "__pycache__/", "*.pyc",
             "*.db", "*.db-journal", "*.db.bak*", "*.sqlite", "*.sqlite3",
@@ -62,6 +63,7 @@ APPS = {
         "port": 3002,
         "url": "https://sevenhabitslist.mebbert.com",
         "stack": "python",
+        "db_remote_path": "/home/ec2-user/sevenhabitslist/data/sevenhabits.db",
         "exclude_patterns": [
             "venv/", "data/", ".git/", "__pycache__/", "*.pyc",
             "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
@@ -77,6 +79,7 @@ APPS = {
         "port": 3003,
         "url": "https://recipeshoppinglist.mebbert.com",
         "stack": "python",
+        "db_remote_path": "/home/ec2-user/recipeshoppinglist/data/recipes.db",
         "exclude_patterns": [
             "venv/", "data/", ".git/", "__pycache__/", "*.pyc",
             "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
@@ -92,6 +95,7 @@ APPS = {
         "port": 3001,
         "url": "https://tifootball.mebbert.com",
         "stack": "node",
+        "db_remote_path": "/home/ec2-user/tifootball/server/db/tifootball.db",
         "exclude_patterns": [
             "node_modules/", ".git/", "client/src/", "server/db/",
             "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
@@ -107,6 +111,9 @@ APPS = {
         "dep_install": "cd server && npm install",
     },
 }
+
+# Backup settings
+BACKUPS_DIR = os.path.join(DEPLOYMENT_MANAGER_DIR, "backups")
 
 
 def get_app_config(name):

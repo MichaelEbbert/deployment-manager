@@ -31,6 +31,16 @@ python logs.py <app> -f             # Follow real-time (Ctrl+C to stop)
 python logs.py <app> --since "1 hour ago"
 ```
 
+### Database Backup
+```bash
+python backup.py <app|all>          # Download database files from server
+python backup.py <app|all> --force  # Backup even if recent backup exists
+python backup.py --list             # List existing local backups
+```
+Backups saved to `backups/<app>/<dbname>.db.yyyy-mm-dd`
+
+Rotation: Only backs up if newest is >7 days old. Keeps 4 weekly + 12 monthly (~16 max).
+
 **App names:** `taskschedule`, `sevenhabitslist`, `recipeshoppinglist`, `tifootball`, `all`
 
 ### How It Works
@@ -333,8 +343,8 @@ All projects use SQLite (file-based databases):
 | tifootball | `/home/ec2-user/tifootball/server/db/tifootball.db` |
 
 **Backup Strategy:**
-- taskschedule: Automatic rotating backups (.bak1 through .bak5)
-- Others: Manual backups recommended
+- taskschedule: Automatic rotating backups on server (.bak1 through .bak5)
+- All apps: Use `python backup.py all` to download databases locally
 
 ---
 
@@ -539,8 +549,8 @@ sudo netstat -tlnp
 
 ## Future Enhancements
 
-- [ ] Create unified deployment script for all projects
-- [ ] Set up automated database backups to S3
+- [x] ~~Create unified deployment script for all projects~~ (done: deploy.py)
+- [x] ~~Set up database backups~~ (done: backup.py downloads to local)
 - [ ] Implement monitoring/alerting (CloudWatch)
 - [ ] Add HTTPS to taskschedule
 - [ ] Implement centralized authentication
