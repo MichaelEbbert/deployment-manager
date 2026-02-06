@@ -156,7 +156,7 @@ def _should_exclude(path, exclude_patterns):
     return False
 
 
-def sync_files(local_path, remote_path, exclude_patterns):
+def sync_files(local_path, remote_path, exclude_patterns, ensure_dirs=None):
     """
     Sync local files to remote server using tarfile + scp + ssh extract.
 
@@ -164,7 +164,8 @@ def sync_files(local_path, remote_path, exclude_patterns):
     2. SCP archive to /tmp on server
     3. SSH to clean stale files (preserving data/venv/node_modules/db dirs)
     4. SSH to extract archive into target directory
-    5. Clean up archive on both ends
+    5. Ensure required directories exist (for dirs excluded from sync but needed at runtime)
+    6. Clean up archive on both ends
     """
     archive_name = f"deploy_{os.path.basename(local_path)}.tar.gz"
     local_archive = os.path.join(tempfile.gettempdir(), archive_name)
@@ -214,7 +215,7 @@ def sync_files(local_path, remote_path, exclude_patterns):
 
         # Step 3: Clean stale files on server (preserve data dirs)
         print("  Cleaning stale files on server...")
-        preserve_dirs = "venv data node_modules db .db"
+        preserve_dirs = "venv data node_modules"
         clean_cmd = (
             f"cd {remote_path} && "
             f"find . -maxdepth 1 -mindepth 1 "
@@ -234,6 +235,13 @@ def sync_files(local_path, remote_path, exclude_patterns):
         if rc != 0:
             print(f"  Extract failed: {stderr}")
             sys.exit(1)
+
+        # Step 5: Ensure required directories exist
+        if ensure_dirs:
+            dirs_cmd = " && ".join(
+                f"mkdir -p {remote_path}/{d}" for d in ensure_dirs
+            )
+            run_ssh_quiet(dirs_cmd)
 
         print("  Sync complete")
 

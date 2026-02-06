@@ -44,6 +44,7 @@ def deploy_app(app_name):
         config["local_path"],
         config["remote_path"],
         config["exclude_patterns"],
+        ensure_dirs=config.get("ensure_dirs"),
     )
 
     # Install dependencies

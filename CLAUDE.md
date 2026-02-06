@@ -337,10 +337,10 @@ All projects use SQLite (file-based databases):
 
 | Project | Database Path |
 |---------|--------------|
-| taskschedule | `/home/ec2-user/taskschedule/database.db` |
+| taskschedule | `/home/ec2-user/taskschedule/data/database.db` |
 | sevenhabitslist | `/home/ec2-user/sevenhabitslist/data/sevenhabits.db` |
 | recipeshoppinglist | `/home/ec2-user/recipeshoppinglist/data/recipes.db` |
-| tifootball | `/home/ec2-user/tifootball/server/db/tifootball.db` |
+| tifootball | `/home/ec2-user/tifootball/data/tifootball.db` |
 
 **Backup Strategy:**
 - taskschedule: Automatic rotating backups on server (.bak1 through .bak5)

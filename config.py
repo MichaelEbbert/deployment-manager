@@ -46,18 +46,18 @@ APPS = {
         "port": 5000,
         "url": "http://taskschedule.mebbert.com:5000",
         "stack": "python",
-        "db_remote_path": "/home/ec2-user/taskschedule/database.db",
+        "db_remote_path": "/home/ec2-user/taskschedule/data/database.db",
         "exclude_patterns": [
-            "venv/", ".git/", "__pycache__/", "*.pyc",
+            "venv/", "data/", ".git/", "__pycache__/", "*.pyc",
             "*.db", "*.db-journal", "*.db.bak*", "*.sqlite", "*.sqlite3",
             "app.log", ".DS_Store",
         ],
         "pre_sync_commands": [],
-
-        "dep_install": "source venv/bin/activate && pip install -r requirements.txt",
+        "ensure_dirs": ["data"],
+        "dep_install": "python3 -m pip install -r requirements.txt",
     },
     "sevenhabitslist": {
-        "local_path": os.path.join(PROJECTS_DIR, "sevenhabitslist", "sevenhabitslist"),
+        "local_path": os.path.join(PROJECTS_DIR, "sevenhabitslist"),
         "remote_path": "/home/ec2-user/sevenhabitslist",
         "service_name": "sevenhabitslist",
         "port": 3002,
@@ -85,8 +85,7 @@ APPS = {
             "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
         ],
         "pre_sync_commands": [],
-
-        "dep_install": "source venv/bin/activate && pip install -r requirements.txt",
+        "dep_install": "python3 -m pip install -r requirements.txt",
     },
     "tifootball": {
         "local_path": os.path.join(PROJECTS_DIR, "tifootball"),
@@ -95,9 +94,9 @@ APPS = {
         "port": 3001,
         "url": "https://tifootball.mebbert.com",
         "stack": "node",
-        "db_remote_path": "/home/ec2-user/tifootball/server/db/tifootball.db",
+        "db_remote_path": "/home/ec2-user/tifootball/data/tifootball.db",
         "exclude_patterns": [
-            "node_modules/", ".git/", "client/src/", "server/db/",
+            "node_modules/", ".git/", "client/src/",
             "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
         ],
         "pre_sync_commands": [
@@ -107,7 +106,7 @@ APPS = {
                 "description": "Building React frontend",
             }
         ],
-
+        "ensure_dirs": ["data"],
         "dep_install": "cd server && npm install",
     },
 }

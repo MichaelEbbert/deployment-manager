@@ -20,7 +20,26 @@
       "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" diff)",
       "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" log --oneline -3)",
       "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" log --oneline -3)",
-      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" add .gitignore .claude/settings.local.json CLAUDE.md)"
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" add .gitignore .claude/settings.local.json CLAUDE.md)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" add CLAUDE.md deploy.py logs.py restart.py status.py)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" commit -m \"$\\(cat <<''EOF''\nUpdate tifootball status to deployed and add gitignore entries\n\nMark tifootball as deployed, add *.jpg to .gitignore, update\nClaude Code permission settings.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" commit -m \"$\\(cat <<''EOF''\nUpdate SSH key paths from D:\\\\ to C:\\\\ drive\n\nUpdate all deployment scripts and docs to use C:\\\\ paths. Add\nauto-discovery of .pem files, scp fallback when rsync unavailable,\nand replace emoji with plain text in output.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" push)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" push)",
+      "Bash(where:*)",
+      "Bash(python:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd centralized deployment scripts for all 4 apps\n\nPython scripts using tarfile+scp+ssh to deploy, check status,\nrestart, and view logs for taskschedule, sevenhabitslist,\nrecipeshoppinglist, and tifootball.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(sqlite3:*)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\taskschedule\" status --short)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\" status --short)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\recipeshoppinglist\" status --short)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\tifootball\" status --short)",
+      "Bash(git -C C:claude_projectstaskschedule status)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\taskschedule\" diff)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\tifootball\" diff)"
     ]
   }
 }
