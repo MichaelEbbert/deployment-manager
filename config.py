@@ -125,6 +125,19 @@ APPS = {
         "ensure_dirs": ["data"],
         "dep_install": "python3 -m pip install -r requirements.txt",
     },
+    "collinsworthbingo": {
+        "local_path": os.path.join(PROJECTS_DIR, "collinsworthbingo"),
+        "remote_path": "/home/ec2-user/collinsworthbingo",
+        "service_name": "collinsworthbingo",
+        "port": 5002,
+        "url": "https://collinsworthbingo.mebbert.com",
+        "stack": "python",
+        "exclude_patterns": [
+            "venv/", ".git/", "__pycache__/", "*.pyc", ".DS_Store",
+        ],
+        "pre_sync_commands": [],
+        "dep_install": "python3 -m pip install -r requirements.txt",
+    },
 }
 
 # Backup settings

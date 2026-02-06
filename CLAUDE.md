@@ -1,6 +1,6 @@
 # Deployment Manager
 
-Central hub for managing deployments of all five Mebbert.com web applications.
+Central hub for managing deployments of all six Mebbert.com web applications.
 
 ## Deployment Scripts
 
@@ -41,7 +41,7 @@ Backups saved to `backups/<app>/<dbname>.db.yyyy-mm-dd`
 
 Rotation: Only backs up if newest is >7 days old. Keeps 4 weekly + 12 monthly (~16 max).
 
-**App names:** `taskschedule`, `sevenhabitslist`, `recipeshoppinglist`, `tifootball`, `rjbingo`, `all`
+**App names:** `taskschedule`, `sevenhabitslist`, `recipeshoppinglist`, `tifootball`, `rjbingo`, `collinsworthbingo`, `all`
 
 ### How It Works
 - Uses `tarfile` (Python stdlib) + `scp` + `ssh` for file sync (no rsync needed)
@@ -53,7 +53,7 @@ Rotation: Only backs up if newest is >7 days old. Keeps 4 weekly + 12 monthly (~
 
 ## Overview
 
-This directory manages deployment for four sibling projects:
+This directory manages deployment for six sibling projects:
 
 | Project | Tech Stack | Port | Subdomain | Status |
 |---------|-----------|------|-----------|--------|
@@ -62,6 +62,7 @@ This directory manages deployment for four sibling projects:
 | **recipeshoppinglist** | FastAPI + SQLite | 3003 | https://recipeshoppinglist.mebbert.com | ✅ Deployed |
 | **tifootball** | React + Node/Express + SQLite | 3001 | https://tifootball.mebbert.com | ✅ Deployed |
 | **rjbingo** | Flask + SQLite + HTMX | 5001 | https://rjbingo.mebbert.com | ✅ Deployed |
+| **collinsworthbingo** | Flask | 5002 | https://collinsworthbingo.mebbert.com | ✅ Deployed |
 
 ## Shared Infrastructure
 
@@ -294,18 +295,37 @@ python deploy.py rjbingo --yes
 
 ---
 
+### 6. Collinsworth Bingo (Flask)
+
+**Local Path:** `C:\claude_projects\collinsworthbingo`
+**Remote Path:** `/home/ec2-user/collinsworthbingo/`
+**Service:** systemd (`collinsworthbingo.service`)
+
+**Key Features:**
+- Chris Collinsworth catchphrase bingo card generator
+- Super Bowl party game — print-and-play
+- No database, no user data — phrases hardcoded in app.py
+- System python3, no venv (like rjbingo)
+
+**Deployment:**
+```bash
+python deploy.py collinsworthbingo --yes
+```
+
+---
+
 ## Common Operations
 
 ### Check All Services Status
 ```bash
 ssh -i "taskschedule-key.pem" ec2-user@100.50.222.238
-sudo systemctl status taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo
+sudo systemctl status taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo collinsworthbingo
 ```
 
 ### View All Logs
 ```bash
 # Real-time logs from all services
-sudo journalctl -u taskschedule -u sevenhabitslist -u recipeshoppinglist -u tifootball -u rjbingo -f
+sudo journalctl -u taskschedule -u sevenhabitslist -u recipeshoppinglist -u tifootball -u rjbingo -u collinsworthbingo -f
 
 # Last 50 lines from each
 sudo journalctl -u taskschedule -n 50
@@ -317,7 +337,7 @@ sudo journalctl -u tifootball -n 50
 ### Restart All Services
 ```bash
 ssh -i "taskschedule-key.pem" ec2-user@100.50.222.238
-sudo systemctl restart taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo
+sudo systemctl restart taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo collinsworthbingo
 ```
 
 ### Nginx Management
@@ -349,6 +369,7 @@ sudo tail -f /var/log/nginx/error.log
 | 3003 | recipeshoppinglist | HTTP (proxied by Nginx) |
 | 5000 | taskschedule | HTTP (direct access) |
 | 5001 | rjbingo | HTTP (proxied by Nginx) |
+| 5002 | collinsworthbingo | HTTP (proxied by Nginx) |
 
 **Security Group:** sg-08148e411586cd1fe (taskschedule-sg)
 
@@ -539,13 +560,13 @@ pip install -r requirements.txt
 ssh -i "taskschedule-key.pem" ec2-user@100.50.222.238
 
 # Check all service statuses
-sudo systemctl status taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo
+sudo systemctl status taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo collinsworthbingo
 
 # Restart all services
-sudo systemctl restart taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo
+sudo systemctl restart taskschedule sevenhabitslist recipeshoppinglist tifootball rjbingo collinsworthbingo
 
 # Follow all logs in real-time
-sudo journalctl -u taskschedule -u sevenhabitslist -u recipeshoppinglist -u tifootball -u rjbingo -f
+sudo journalctl -u taskschedule -u sevenhabitslist -u recipeshoppinglist -u tifootball -u rjbingo -u collinsworthbingo -f
 
 # Check nginx status
 sudo systemctl status nginx
