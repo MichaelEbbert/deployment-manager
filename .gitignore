@@ -3,3 +3,6 @@
 *.tar.gz
 __pycache__/
 backups/
+data/
+nul
+.claude/
