@@ -3,7 +3,24 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" status)",
-      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" add CLAUDE.md .gitignore .claude/)"
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" add CLAUDE.md .gitignore .claude/)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" diff --cached --stat)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" commit -m \"$\\(cat <<''EOF''\nInitial commit: deployment manager for mebbert.com web apps\n\nCentralizes deployment documentation and configuration for four\nsibling projects \\(taskschedule, sevenhabitslist, recipeshoppinglist,\ntifootball\\) hosted on a shared AWS EC2 instance.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" branch -M:*)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" remote add origin:*)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" push -u origin main)",
+      "Bash(ssh:*)",
+      "Bash(curl:*)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\taskschedule\" status)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\" status)",
+      "Bash(dir:*)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" status)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\recipeshoppinglist\" status)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\tifootball\" status)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" diff)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" log --oneline -3)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\sevenhabitslist\\\\sevenhabitslist\" log --oneline -3)",
+      "Bash(git -C \"C:\\\\claude_projects\\\\deployment-manager\" add .gitignore .claude/settings.local.json CLAUDE.md)"
     ]
   }
 }
