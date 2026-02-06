@@ -109,6 +109,22 @@ APPS = {
         "ensure_dirs": ["data"],
         "dep_install": "cd server && npm install",
     },
+    "rjbingo": {
+        "local_path": os.path.join(PROJECTS_DIR, "rjbingo"),
+        "remote_path": "/home/ec2-user/rjbingo",
+        "service_name": "rjbingo",
+        "port": 5001,
+        "url": "https://rjbingo.mebbert.com",
+        "stack": "python",
+        "db_remote_path": "/home/ec2-user/rjbingo/data/bingo.db",
+        "exclude_patterns": [
+            "venv/", "data/", ".git/", "__pycache__/", "*.pyc",
+            "*.db", "*.db-journal", "*.sqlite", "*.sqlite3", ".DS_Store",
+        ],
+        "pre_sync_commands": [],
+        "ensure_dirs": ["data"],
+        "dep_install": "python3 -m pip install -r requirements.txt",
+    },
 }
 
 # Backup settings
