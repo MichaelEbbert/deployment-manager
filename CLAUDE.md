@@ -2,6 +2,45 @@
 
 Central hub for managing deployments of all four Mebbert.com web applications.
 
+## Deployment Scripts
+
+All deployment operations are run from this directory (`C:\claude_projects\deployment-manager\`).
+
+### Full Deploy (sync files + install deps + restart + verify)
+```bash
+python deploy.py <app|all>          # Deploy with confirmation prompt
+python deploy.py <app|all> --yes    # Skip confirmation
+```
+
+### Status Check (read-only health checks)
+```bash
+python status.py <app|all>
+```
+Checks: service status, port listening, process running, HTTP response, recent logs.
+
+### Quick Restart
+```bash
+python restart.py <app|all>
+```
+
+### View Logs
+```bash
+python logs.py <app>                # Last 50 lines
+python logs.py <app> -n 100         # Last 100 lines
+python logs.py <app> -f             # Follow real-time (Ctrl+C to stop)
+python logs.py <app> --since "1 hour ago"
+```
+
+**App names:** `taskschedule`, `sevenhabitslist`, `recipeshoppinglist`, `tifootball`, `all`
+
+### How It Works
+- Uses `tarfile` (Python stdlib) + `scp` + `ssh` for file sync (no rsync needed)
+- Excludes: venv/, .git/, __pycache__/, *.db, *.db-journal, data dirs
+- Config in `config.py`, SSH utilities in `ssh_utils.py`
+- SSH key auto-detected from `*.pem` in this directory
+
+---
+
 ## Overview
 
 This directory manages deployment for four sibling projects:
